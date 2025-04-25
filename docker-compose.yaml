@@ -1,0 +1,15 @@
+services:
+  postgres-grand-capital:
+    image: "postgres:15.3"
+    container_name: grand-capital-task
+    environment:
+      - POSTGRES_DB=grand-capital-task
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=myuser
+    ports:
+      - "5431:5432"
+    volumes:
+      - grand-capital-task:/var/lib/postgresql/data
+
+volumes:
+  grand-capital-task:
