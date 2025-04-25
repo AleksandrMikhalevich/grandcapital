@@ -18,8 +18,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="PASSWORD" type="VARCHAR(500)">
-                <constraints nullable="false"
-                             checkConstraint="char_length(PASSWORD) BETWEEN 8 AND 500"/>
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>

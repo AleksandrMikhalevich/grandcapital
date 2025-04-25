@@ -10,4 +10,6 @@
     <include file="changelogs/2-create-table-account.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/3-create-table-email-data.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/4-create-table-phone-data.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/5-add-password-check.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/6-add-balance-check.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
