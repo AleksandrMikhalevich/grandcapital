@@ -1,6 +1,6 @@
 package by.mikhalevich.grandcapitaltesttask.service.security.jwt;
 
-import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationUserDto;
+import by.mikhalevich.grandcapitaltesttask.service.dto.UserAuthenticationDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -59,7 +59,7 @@ public class JwtTokenProvider {
     /**
      * Создание токена
      */
-    public String createToken(AuthenticationUserDto user) {
+    public String createToken(UserAuthenticationDto user) {
         Claims claims = Jwts.claims().setSubject(user.userId());
         Instant now = Instant.now();
         Instant validity = now.plusMillis(validityInMilliseconds);

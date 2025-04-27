@@ -7,5 +7,5 @@ import java.io.Serializable;
  * @author Alex Mikhalevich
  * @created 2025-04-26 15:09
  */
-public record AuthenticationUserDto(String userId) implements Serializable {
+public record UserAuthenticationDto(String userId) implements Serializable {
 }

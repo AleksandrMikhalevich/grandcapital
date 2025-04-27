@@ -1,7 +1,7 @@
 package by.mikhalevich.grandcapitaltesttask.service.intrfc;
 
 import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationRequestDto;
-import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationUserDto;
+import by.mikhalevich.grandcapitaltesttask.service.dto.UserAuthenticationDto;
 
 /**
  * Интерфейс-сервис для аутентификации
@@ -15,5 +15,5 @@ public interface AuthenticationService {
      * @param requestDto ДТО-запрос для аутентификации
      * @return ДТО-ответ для аутентификации
      */
-    AuthenticationUserDto findByEmailAndPassword(AuthenticationRequestDto requestDto);
+    UserAuthenticationDto findByEmailAndPassword(AuthenticationRequestDto requestDto);
 }

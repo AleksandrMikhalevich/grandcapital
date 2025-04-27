@@ -2,6 +2,7 @@ package by.mikhalevich.grandcapitaltesttask.dao.repository;
 
 import by.mikhalevich.grandcapitaltesttask.dao.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -10,7 +11,7 @@ import org.springframework.data.repository.query.Param;
  * @author Alex Mikhalevich
  * @created 2025-04-26 13:32
  */
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
     /**
      * Метод нахождения пользователя по адресу электронной почты

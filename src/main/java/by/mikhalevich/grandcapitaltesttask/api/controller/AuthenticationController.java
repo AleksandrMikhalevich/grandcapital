@@ -1,7 +1,7 @@
 package by.mikhalevich.grandcapitaltesttask.api.controller;
 
 import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationRequestDto;
-import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationUserDto;
+import by.mikhalevich.grandcapitaltesttask.service.dto.UserAuthenticationDto;
 import by.mikhalevich.grandcapitaltesttask.service.impl.AuthenticationServiceImpl;
 import by.mikhalevich.grandcapitaltesttask.service.security.jwt.JwtTokenProvider;
 import jakarta.validation.Valid;
@@ -44,11 +44,11 @@ public class AuthenticationController {
     /**
      * Аутентификация пользователя по email + пароль
      * @param requestDto запрос email + пароль
-     * @return ответ
+     * @return результат
      */
     @PostMapping("login")
     public ResponseEntity<Object> login(@Valid @RequestBody AuthenticationRequestDto requestDto) {
-        AuthenticationUserDto user = authenticationService.findByEmailAndPassword(requestDto);
+        UserAuthenticationDto user = authenticationService.findByEmailAndPassword(requestDto);
         if (user == null) {
             log.info(LOG_AUTH_ERROR_MESSAGE, requestDto.email());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(AUTH_ERROR_MESSAGE);

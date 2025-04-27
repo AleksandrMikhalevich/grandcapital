@@ -1,7 +1,7 @@
 package by.mikhalevich.grandcapitaltesttask.service.mapper;
 
 import by.mikhalevich.grandcapitaltesttask.dao.model.User;
-import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationUserDto;
+import by.mikhalevich.grandcapitaltesttask.service.dto.UserAuthenticationDto;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
  * @created 2025-04-26 16:09
  */
 @Component
-public class AuthenticationUserMapper {
+public class UserAuthenticationMapper {
 
     /**
      * Метод маппинга
      * @param user пользователь
      * @return ДТО-ответ для аутентификации
      */
-    public AuthenticationUserDto userToAuthenticationUserDto(User user) {
-        return new AuthenticationUserDto(String.valueOf(user.getId()));
+    public UserAuthenticationDto userToAuthenticationUserDto(User user) {
+        return new UserAuthenticationDto(String.valueOf(user.getId()));
     }
 }

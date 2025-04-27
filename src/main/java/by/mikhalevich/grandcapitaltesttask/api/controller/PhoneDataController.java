@@ -33,6 +33,9 @@ import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.MESSAGE
 @Validated
 public class PhoneDataController {
 
+    /**
+     * Сервис телефонов пользователей
+     */
     private final PhoneDataService phoneDataService;
 
     /**
@@ -40,7 +43,7 @@ public class PhoneDataController {
      * @param userId Id пользователя
      * @param phoneDto номера телефона
      * @param currentUser текущий пользователь
-     * @return статус
+     * @return результат
      */
     @PostMapping("/{userId}/phones")
     public ResponseEntity<Object> addPhone(@PathVariable Long userId,
@@ -60,7 +63,7 @@ public class PhoneDataController {
      * @param phoneDataId Id номера телефона
      * @param phoneDto номера телефона
      * @param currentUser текущий пользователь
-     * @return статус
+     * @return результат
      */
     @PutMapping("/{userId}/phones/{phoneDataId}")
     public ResponseEntity<Object> updatePhone(@PathVariable Long userId,
@@ -80,7 +83,7 @@ public class PhoneDataController {
      * @param userId Id пользователя
      * @param phoneDataId Id номера телефона
      * @param currentUser текущий пользователь
-     * @return статус
+     * @return результат
      */
     @DeleteMapping("/{userId}/phones/{phoneDataId}")
     public ResponseEntity<Object> deletePhone(@PathVariable Long userId,

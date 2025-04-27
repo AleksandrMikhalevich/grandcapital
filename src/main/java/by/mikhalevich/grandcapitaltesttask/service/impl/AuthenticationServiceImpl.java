@@ -3,9 +3,9 @@ package by.mikhalevich.grandcapitaltesttask.service.impl;
 import by.mikhalevich.grandcapitaltesttask.dao.model.User;
 import by.mikhalevich.grandcapitaltesttask.dao.repository.UserRepository;
 import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationRequestDto;
-import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationUserDto;
+import by.mikhalevich.grandcapitaltesttask.service.dto.UserAuthenticationDto;
 import by.mikhalevich.grandcapitaltesttask.service.intrfc.AuthenticationService;
-import by.mikhalevich.grandcapitaltesttask.service.mapper.AuthenticationUserMapper;
+import by.mikhalevich.grandcapitaltesttask.service.mapper.UserAuthenticationMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     /**
      * Маппер ДТО
      */
-    private final AuthenticationUserMapper authenticationUserMapper;
+    private final UserAuthenticationMapper userAuthenticationMapper;
 
     /**
      * BCrypt-кодировщик
@@ -40,11 +40,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public AuthenticationUserDto findByEmailAndPassword(AuthenticationRequestDto requestDto) {
+    public UserAuthenticationDto findByEmailAndPassword(AuthenticationRequestDto requestDto) {
         User user = userRepository.findUserByEmail(requestDto.email());
         if (user != null && passwordEncoder.matches(requestDto.password(), user.getPassword())) {
             log.info(LOG_USER_FOUND_MESSAGE, requestDto.email());
-            return authenticationUserMapper.userToAuthenticationUserDto(user);
+            return userAuthenticationMapper.userToAuthenticationUserDto(user);
         }
         log.info(LOG_USER_NOT_FOUND_MESSAGE, requestDto.email());
         return null;

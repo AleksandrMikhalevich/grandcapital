@@ -33,6 +33,9 @@ import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.MESSAGE
 @Validated
 public class EmailDataController {
 
+    /**
+     * Сервис адресов электронной почты
+     */
     private final EmailDataService emailDataService;
 
     /**
@@ -40,7 +43,7 @@ public class EmailDataController {
      * @param userId Id пользователя
      * @param emailDto адрес электронной почты
      * @param currentUser текущий пользователь
-     * @return статус
+     * @return результат
      */
     @PostMapping("/{userId}/emails")
     public ResponseEntity<Object> addEmail(@PathVariable Long userId,
@@ -60,7 +63,7 @@ public class EmailDataController {
      * @param emailDataId Id адреса электронной почты
      * @param emailDto адрес электронной почты
      * @param currentUser текущий пользователь
-     * @return статус
+     * @return результат
      */
     @PutMapping("/{userId}/emails/{emailDataId}")
     public ResponseEntity<Object> updateEmail(@PathVariable Long userId,
@@ -80,7 +83,7 @@ public class EmailDataController {
      * @param userId Id пользователя
      * @param emailDataId Id адреса электронной почты
      * @param currentUser текущий пользователь
-     * @return статус
+     * @return результат
      */
     @DeleteMapping("/{userId}/emails/{emailDataId}")
     public ResponseEntity<Object> deleteEmail(@PathVariable Long userId,
