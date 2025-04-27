@@ -3,7 +3,6 @@ package by.mikhalevich.grandcapitaltesttask.service.security.jwt;
 import by.mikhalevich.grandcapitaltesttask.dao.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,7 @@ public class JwtUserDetailsService {
     /**
      * Нахождение пользователя по Id
      */
-    public UserDetails loadUserById(Long id) throws UsernameNotFoundException {
+    public JwtUser loadUserById(Long id) throws UsernameNotFoundException {
         return userRepository.findById(id)
                 .map(JwtUserFactory::create)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Пользователь с Id %s не найден", id)));

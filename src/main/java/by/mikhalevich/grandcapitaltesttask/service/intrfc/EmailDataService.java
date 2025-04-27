@@ -10,7 +10,7 @@ public interface EmailDataService {
     /**
      * Добавляет новый адрес электронной почты для пользователя, если он не занят
      * @param userId Id пользователя
-     * @param email адрес новой электронной почты пользователя
+     * @param email адрес новой электронной почты
      */
     void addEmailForUser(Long userId, String email);
 
@@ -18,7 +18,7 @@ public interface EmailDataService {
      * Обновляет адрес электронной почты пользователя
      * @param userId Id пользователя
      * @param emailDataId Id адреса электронной почты для обновления
-     * @param newEmail обновленный адрес электронной почты пользователя
+     * @param newEmail обновленный адрес электронной почты
      */
     void updateUserEmail(Long userId, Long emailDataId, String newEmail);
 

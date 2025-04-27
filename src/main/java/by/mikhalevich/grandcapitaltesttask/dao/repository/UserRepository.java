@@ -5,8 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Optional;
-
 /**
  * JPA-репозиторий для {@link User}
  * @author Alex Mikhalevich
@@ -20,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return результат
      */
     @Query("SELECT u FROM User u JOIN u.emailData ed WHERE ed.email = :email")
-    Optional<User> findUserByEmail(@Param("email") String email);
+    User findUserByEmail(@Param("email") String email);
 
 }

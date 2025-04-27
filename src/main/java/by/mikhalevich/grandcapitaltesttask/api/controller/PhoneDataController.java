@@ -1,7 +1,7 @@
 package by.mikhalevich.grandcapitaltesttask.api.controller;
 
-import by.mikhalevich.grandcapitaltesttask.service.dto.EmailRequestDto;
-import by.mikhalevich.grandcapitaltesttask.service.intrfc.EmailDataService;
+import by.mikhalevich.grandcapitaltesttask.service.dto.PhoneRequestDto;
+import by.mikhalevich.grandcapitaltesttask.service.intrfc.PhoneDataService;
 import by.mikhalevich.grandcapitaltesttask.service.security.jwt.JwtUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,75 +22,75 @@ import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.LOG_MES
 import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.MESSAGE_403;
 
 /**
- * Класс-контроллер для работы с адресами электронной почты пользователя
+ * Класс-контроллер для работы с номерами телефона пользователя
  * @author Alex Mikhalevich
- * @created 2025-04-26 13:57
+ * @created 2025-04-27 13:21
  */
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 @Slf4j
 @Validated
-public class EmailDataController {
+public class PhoneDataController {
 
-    private final EmailDataService emailDataService;
+    private final PhoneDataService phoneDataService;
 
     /**
-     * Добавление адреса электронной почты пользователю
+     * Добавление номера телефона пользователю
      * @param userId Id пользователя
-     * @param emailDto адрес электронной почты
+     * @param phoneDto номера телефона
      * @param currentUser текущий пользователь
      * @return статус
      */
-    @PostMapping("/{userId}/emails")
-    public ResponseEntity<Object> addEmail(@PathVariable Long userId,
-                                      @RequestBody @Valid EmailRequestDto emailDto,
+    @PostMapping("/{userId}/phones")
+    public ResponseEntity<Object> addPhone(@PathVariable Long userId,
+                                      @RequestBody @Valid PhoneRequestDto phoneDto,
                                       @AuthenticationPrincipal JwtUser currentUser) {
         if (!currentUser.getUserId().equals(userId)) {
             log.info(LOG_MESSAGE_403, currentUser.getUserId());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(MESSAGE_403);
         }
-        emailDataService.addEmailForUser(userId, emailDto.email());
+        phoneDataService.addPhoneForUser(userId, phoneDto.phone());
         return ResponseEntity.ok().build();
     }
 
     /**
-     * Обновление адреса электронной почты пользователю
+     * Обновление номера телефона пользователю
      * @param userId Id пользователя
-     * @param emailDataId Id адреса электронной почты
-     * @param emailDto адрес электронной почты
+     * @param phoneDataId Id номера телефона
+     * @param phoneDto номера телефона
      * @param currentUser текущий пользователь
      * @return статус
      */
-    @PutMapping("/{userId}/emails/{emailDataId}")
-    public ResponseEntity<Object> updateEmail(@PathVariable Long userId,
-                                         @PathVariable Long emailDataId,
-                                         @RequestBody @Valid EmailRequestDto emailDto,
+    @PutMapping("/{userId}/phones/{phoneDataId}")
+    public ResponseEntity<Object> updatePhone(@PathVariable Long userId,
+                                         @PathVariable Long phoneDataId,
+                                         @RequestBody @Valid PhoneRequestDto phoneDto,
                                          @AuthenticationPrincipal JwtUser currentUser) {
         if (!currentUser.getUserId().equals(userId)) {
             log.info(LOG_MESSAGE_403, currentUser.getUserId());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(MESSAGE_403);
         }
-        emailDataService.updateUserEmail(userId, emailDataId, emailDto.email());
+        phoneDataService.updateUserPhone(userId, phoneDataId, phoneDto.phone());
         return ResponseEntity.ok().build();
     }
 
     /**
-     * Удаление адреса электронной почты пользователя
+     * Удаление номера телефона пользователя
      * @param userId Id пользователя
-     * @param emailDataId Id адреса электронной почты
+     * @param phoneDataId Id номера телефона
      * @param currentUser текущий пользователь
      * @return статус
      */
-    @DeleteMapping("/{userId}/emails/{emailDataId}")
-    public ResponseEntity<Object> deleteEmail(@PathVariable Long userId,
-                                         @PathVariable Long emailDataId,
+    @DeleteMapping("/{userId}/phones/{phoneDataId}")
+    public ResponseEntity<Object> deletePhone(@PathVariable Long userId,
+                                         @PathVariable Long phoneDataId,
                                          @AuthenticationPrincipal JwtUser currentUser) {
         if (!currentUser.getUserId().equals(userId)) {
             log.info(LOG_MESSAGE_403, currentUser.getUserId());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(MESSAGE_403);
         }
-        emailDataService.deleteUserEmail(userId, emailDataId);
+        phoneDataService.deleteUserPhone(userId, phoneDataId);
         return ResponseEntity.ok().build();
     }
 

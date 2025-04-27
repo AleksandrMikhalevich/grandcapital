@@ -8,9 +8,11 @@ import by.mikhalevich.grandcapitaltesttask.service.intrfc.AuthenticationService;
 import by.mikhalevich.grandcapitaltesttask.service.mapper.AuthenticationUserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.LOG_USER_FOUND_MESSAGE;
+import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.LOG_USER_NOT_FOUND_MESSAGE;
 
 /**
  * Класс-сервис для аутентификации
@@ -39,14 +41,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationUserDto findByEmailAndPassword(AuthenticationRequestDto requestDto) {
-        User user = userRepository.findUserByEmail(requestDto.email())
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("Пользователь с %s не найден", requestDto.email())));
-        AuthenticationUserDto authenticationUserDto = authenticationUserMapper.userToAuthenticationUserDto(user);
-        if (passwordEncoder.matches(requestDto.password(), user.getPassword())) {
-            log.info("Пользователь найден по email: {}", requestDto.email());
-            return authenticationUserDto;
+        User user = userRepository.findUserByEmail(requestDto.email());
+        if (user != null && passwordEncoder.matches(requestDto.password(), user.getPassword())) {
+            log.info(LOG_USER_FOUND_MESSAGE, requestDto.email());
+            return authenticationUserMapper.userToAuthenticationUserDto(user);
         }
-        log.info("Неверный email или пароль");
+        log.info(LOG_USER_NOT_FOUND_MESSAGE, requestDto.email());
         return null;
     }
 }

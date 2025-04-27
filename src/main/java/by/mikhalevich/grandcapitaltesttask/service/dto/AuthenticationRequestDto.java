@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 
 import java.io.Serializable;
 
-import static by.mikhalevich.grandcapitaltesttask.service.util.ValidationConstants.EMAIL_PATTERN;
+import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.EMAIL_PATTERN;
 
 /**
  * ДТО-запрос для аутентификации
