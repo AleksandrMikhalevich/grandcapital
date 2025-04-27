@@ -11,5 +11,14 @@ services:
     volumes:
       - grand-capital-task:/var/lib/postgresql/data
 
+  redis:
+    image: 'redis:latest'
+    container_name: grand-capital-task-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - grand-capital-task-redis:/var/lib/redis/data
+
 volumes:
   grand-capital-task:
+  grand-capital-task-redis:

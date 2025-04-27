@@ -16,3 +16,7 @@ spring:
     jwt:
       secret: ${JWT_SECRET_PHRASE:defaultjwtsecretphrase111defaultjwtsecretphrase222defaultjwtsecretphrase333}
       expired: 3600000
+  data:
+    redis:
+      port: ${REDIS_PORT}
+      host: ${REDIS_HOST}

@@ -46,6 +46,7 @@ public class Constants {
 
     public static final String PHONE_NOT_FOUND_MESSAGE = "Телефон не найден для пользователя с Id %s";
 
+    public static final String INITIAL_BALANCE_KEY_PREFIX = "initialBalance:";
 
 
 }
