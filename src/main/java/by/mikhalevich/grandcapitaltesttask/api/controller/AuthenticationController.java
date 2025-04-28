@@ -4,6 +4,8 @@ import by.mikhalevich.grandcapitaltesttask.service.dto.AuthenticationRequestDto;
 import by.mikhalevich.grandcapitaltesttask.service.dto.UserAuthenticationDto;
 import by.mikhalevich.grandcapitaltesttask.service.impl.AuthenticationServiceImpl;
 import by.mikhalevich.grandcapitaltesttask.service.security.jwt.JwtTokenProvider;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,7 @@ import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.LOG_AUT
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth/")
 @Slf4j
+@Tag(name = "API аутентификации", description = "Контроллер для JWT-аутентификации пользователей")
 public class AuthenticationController {
 
     /**
@@ -47,6 +50,7 @@ public class AuthenticationController {
      * @return результат
      */
     @PostMapping("login")
+    @Operation(summary = "Логин", description = "Логин пользователя с получением JWT-токена")
     public ResponseEntity<Object> login(@Valid @RequestBody AuthenticationRequestDto requestDto) {
         UserAuthenticationDto user = authenticationService.findByEmailAndPassword(requestDto);
         if (user == null) {

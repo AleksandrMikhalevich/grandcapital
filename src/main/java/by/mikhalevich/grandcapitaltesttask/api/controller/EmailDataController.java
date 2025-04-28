@@ -3,6 +3,8 @@ package by.mikhalevich.grandcapitaltesttask.api.controller;
 import by.mikhalevich.grandcapitaltesttask.service.dto.EmailRequestDto;
 import by.mikhalevich.grandcapitaltesttask.service.intrfc.EmailDataService;
 import by.mikhalevich.grandcapitaltesttask.service.security.jwt.JwtUser;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,7 @@ import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.MESSAGE
 @RequiredArgsConstructor
 @Slf4j
 @Validated
+@Tag(name = "API электронной почты пользователя", description = "Контроллер для работы с адресами электронной почты пользователя")
 public class EmailDataController {
 
     /**
@@ -46,6 +49,7 @@ public class EmailDataController {
      * @return результат
      */
     @PostMapping("/{userId}/emails")
+    @Operation(summary = "Добавление email", description = "Добавление email в список адресов электронной почты пользователя")
     public ResponseEntity<Object> addEmail(@PathVariable Long userId,
                                       @RequestBody @Valid EmailRequestDto emailDto,
                                       @AuthenticationPrincipal JwtUser currentUser) {
@@ -66,6 +70,7 @@ public class EmailDataController {
      * @return результат
      */
     @PutMapping("/{userId}/emails/{emailDataId}")
+    @Operation(summary = "Обновление email", description = "Обновление email в списке адресов электронной почты пользователя")
     public ResponseEntity<Object> updateEmail(@PathVariable Long userId,
                                          @PathVariable Long emailDataId,
                                          @RequestBody @Valid EmailRequestDto emailDto,
@@ -86,6 +91,7 @@ public class EmailDataController {
      * @return результат
      */
     @DeleteMapping("/{userId}/emails/{emailDataId}")
+    @Operation(summary = "Удаление email", description = "Удаление email из списка адресов электронной почты пользователя")
     public ResponseEntity<Object> deleteEmail(@PathVariable Long userId,
                                          @PathVariable Long emailDataId,
                                          @AuthenticationPrincipal JwtUser currentUser) {

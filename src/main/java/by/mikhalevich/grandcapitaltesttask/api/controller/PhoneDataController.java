@@ -3,6 +3,8 @@ package by.mikhalevich.grandcapitaltesttask.api.controller;
 import by.mikhalevich.grandcapitaltesttask.service.dto.PhoneRequestDto;
 import by.mikhalevich.grandcapitaltesttask.service.intrfc.PhoneDataService;
 import by.mikhalevich.grandcapitaltesttask.service.security.jwt.JwtUser;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,7 @@ import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.MESSAGE
 @RequiredArgsConstructor
 @Slf4j
 @Validated
+@Tag(name = "API телефонов пользователя", description = "Контроллер для работы с номерами телефона пользователя")
 public class PhoneDataController {
 
     /**
@@ -46,6 +49,7 @@ public class PhoneDataController {
      * @return результат
      */
     @PostMapping("/{userId}/phones")
+    @Operation(summary = "Добавление телефона", description = "Добавление номера телефона в список телефонов пользователя")
     public ResponseEntity<Object> addPhone(@PathVariable Long userId,
                                       @RequestBody @Valid PhoneRequestDto phoneDto,
                                       @AuthenticationPrincipal JwtUser currentUser) {
@@ -66,6 +70,7 @@ public class PhoneDataController {
      * @return результат
      */
     @PutMapping("/{userId}/phones/{phoneDataId}")
+    @Operation(summary = "Обновление телефона", description = "Обновление номера телефона в списке телефонов пользователя")
     public ResponseEntity<Object> updatePhone(@PathVariable Long userId,
                                          @PathVariable Long phoneDataId,
                                          @RequestBody @Valid PhoneRequestDto phoneDto,
@@ -86,6 +91,7 @@ public class PhoneDataController {
      * @return результат
      */
     @DeleteMapping("/{userId}/phones/{phoneDataId}")
+    @Operation(summary = "Удаление телефона", description = "Удаление номера телефона из списка телефонов пользователя")
     public ResponseEntity<Object> deletePhone(@PathVariable Long userId,
                                          @PathVariable Long phoneDataId,
                                          @AuthenticationPrincipal JwtUser currentUser) {

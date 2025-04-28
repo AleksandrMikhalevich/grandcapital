@@ -3,6 +3,8 @@ package by.mikhalevich.grandcapitaltesttask.api.controller;
 import by.mikhalevich.grandcapitaltesttask.service.dto.UserSearchResponseDto;
 import by.mikhalevich.grandcapitaltesttask.service.intrfc.UserService;
 import by.mikhalevich.grandcapitaltesttask.service.specification.UserSpecification;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +28,7 @@ import java.time.LocalDate;
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 @Validated
+@Tag(name = "API пользователей", description = "Контроллер для работы с пользователями")
 public class UserController {
 
     /**
@@ -44,6 +47,7 @@ public class UserController {
      * @return результат
      */
     @GetMapping("/search")
+    @Operation(summary = "Поиск пользователей", description = "Поиск пользователей по параметрам")
     public ResponseEntity<Page<UserSearchResponseDto>> search(@RequestParam(value = "dateOfBirth", required = false)
                                                               @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dateOfBirth,
                                                               @RequestParam(value = "phone", required = false) String phone,

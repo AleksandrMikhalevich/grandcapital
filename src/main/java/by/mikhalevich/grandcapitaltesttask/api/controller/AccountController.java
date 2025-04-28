@@ -2,6 +2,8 @@ package by.mikhalevich.grandcapitaltesttask.api.controller;
 
 import by.mikhalevich.grandcapitaltesttask.service.intrfc.AccountService;
 import by.mikhalevich.grandcapitaltesttask.service.security.jwt.JwtUser;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.*;
 @RequestMapping("/api/v1/account")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "API счетов", description = "Контроллер для работы со счетами пользователей")
 public class AccountController {
 
     /**
@@ -40,6 +43,7 @@ public class AccountController {
      * @return результат
      */
     @PostMapping("/transfer")
+    @Operation(summary = "Перевод средств", description = "Перевод средств от одного пользователя к другому")
     public ResponseEntity<String> transfer(@RequestParam("toUserId") Long toUserId,
                                            @RequestParam("amount") BigDecimal amount,
                                            @AuthenticationPrincipal JwtUser currentUser) {
