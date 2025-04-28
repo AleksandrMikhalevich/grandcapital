@@ -25,9 +25,9 @@ public class SecurityConfig {
     private static final String[] AUTH_WHITELIST = {
             "/api/v1/auth/login",
             "/actuator/**",
-            "/actuator",
             "/swagger-resources/**",
             "/swagger-ui/**",
+            "/swagger-ui/index.html",
             "/v3/api-docs/**",
             "/webjars/**"
     };
@@ -49,8 +49,6 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                )
-                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
