@@ -46,6 +46,20 @@ public class Constants {
 
     public static final String PHONE_NOT_FOUND_MESSAGE = "Телефон не найден для пользователя с Id %s";
 
+    public static final String LOG_MONEY_TRANSFER_ERROR_MESSAGE = "Попытка перевода средств самому себе пользователем с Id {}";
+
+    public static final String MONEY_TRANSFER_ERROR_MESSAGE = "Нельзя переводить средства самому себе";
+
+    public static final String MONEY_TRANSFER_AMOUNT_ERROR_MESSAGE = "Сумма перевода должна быть положительной";
+
+    public static final String SENDER_ACCOUNT_NOT_FOUND_MESSAGE = "Аккаунт отправителя не найден";
+
+    public static final String RECEIVER_ACCOUNT_NOT_FOUND_MESSAGE = "Аккаунт получателя не найден";
+
+    public static final String MONEY_TRANSFER_NOT_ENOUGH_MONEY_MESSAGE = "Недостаточно средств для перевода";
+
+    public static final String MONEY_TRANSFER_SUCCESS_MESSAGE = "Перевод средств выполнен успешно";
+
     public static final String INITIAL_BALANCE_KEY_PREFIX = "initialBalance:";
 
 

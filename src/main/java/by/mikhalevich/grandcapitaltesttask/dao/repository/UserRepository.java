@@ -14,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
     /**
-     * Метод нахождения пользователя по адресу электронной почты
+     * Нахождение пользователя по адресу электронной почты
      * @param email адрес электронной почты
      * @return результат
      */

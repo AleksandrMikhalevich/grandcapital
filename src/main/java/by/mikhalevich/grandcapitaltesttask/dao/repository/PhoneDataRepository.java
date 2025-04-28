@@ -13,10 +13,10 @@ import java.util.Optional;
 public interface PhoneDataRepository extends JpaRepository<PhoneData, Long> {
 
     /**
-     * Метод нахождения телефона
-     * @param email адрес электронной почты
+     * Нахождение телефона пользователя
+     * @param phone номер телефона
      * @return результат
      */
-    Optional<PhoneData> findByPhone(String email);
+    Optional<PhoneData> findByPhone(String phone);
 
 }

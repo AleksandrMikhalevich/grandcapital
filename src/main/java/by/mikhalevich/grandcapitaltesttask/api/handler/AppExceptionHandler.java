@@ -2,6 +2,7 @@ package by.mikhalevich.grandcapitaltesttask.api.handler;
 
 import by.mikhalevich.grandcapitaltesttask.api.exception.DataNotFoundException;
 import by.mikhalevich.grandcapitaltesttask.api.exception.ErrorResponse;
+import by.mikhalevich.grandcapitaltesttask.api.exception.MoneyTransferException;
 import by.mikhalevich.grandcapitaltesttask.api.exception.NotUniqueDataException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,6 +36,17 @@ public class AppExceptionHandler {
     public ErrorResponse handlerNotUniqueDataException(NotUniqueDataException exception) {
         return new ErrorResponse(
                 HttpStatus.CONFLICT.value(),
+                exception.getMessage());
+    }
+
+    /**
+     * Обработка {@link MoneyTransferException}
+     */
+    @ExceptionHandler({MoneyTransferException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handlerMoneyTransferException(MoneyTransferException exception) {
+        return new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
                 exception.getMessage());
     }
 }

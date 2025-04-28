@@ -1,5 +1,7 @@
 package by.mikhalevich.grandcapitaltesttask.service.impl;
 
+import by.mikhalevich.grandcapitaltesttask.api.exception.DataNotFoundException;
+import by.mikhalevich.grandcapitaltesttask.api.exception.MoneyTransferException;
 import by.mikhalevich.grandcapitaltesttask.dao.model.Account;
 import by.mikhalevich.grandcapitaltesttask.dao.repository.AccountRepository;
 import by.mikhalevich.grandcapitaltesttask.service.intrfc.AccountService;
@@ -11,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static by.mikhalevich.grandcapitaltesttask.service.util.Constants.*;
+
 /**
  * Класс-сервис для работы со счетами пользователя
  * @author Alex Mikhalevich
@@ -18,6 +22,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AccountServiceImpl implements AccountService {
 
     /**
@@ -35,7 +40,6 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     @Scheduled(fixedRate = 30000)
-    @Transactional
     public void updateBalances() {
         List<Account> accounts = accountRepository.findAll();
         for (Account account : accounts) {
@@ -49,5 +53,23 @@ public class AccountServiceImpl implements AccountService {
             account.setBalance(candidate);
         }
         accountRepository.saveAll(accounts);
+    }
+
+    /**
+     * Перевод средств от одного пользователя к другому
+     */
+    public void transferMoney(Long fromUserId, Long toUserId, BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new MoneyTransferException(MONEY_TRANSFER_AMOUNT_ERROR_MESSAGE);
+        }
+        Account senderAccount = accountRepository.findByUserIdForUpdate(fromUserId)
+                .orElseThrow(() -> new DataNotFoundException(SENDER_ACCOUNT_NOT_FOUND_MESSAGE));
+        Account receiverAccount = accountRepository.findByUserIdForUpdate(toUserId)
+                .orElseThrow(() -> new DataNotFoundException(RECEIVER_ACCOUNT_NOT_FOUND_MESSAGE));
+        if (senderAccount.getBalance().compareTo(amount) < 0) {
+            throw new MoneyTransferException(MONEY_TRANSFER_NOT_ENOUGH_MONEY_MESSAGE);
+        }
+        senderAccount.setBalance(senderAccount.getBalance().subtract(amount));
+        receiverAccount.setBalance(receiverAccount.getBalance().add(amount));
     }
 }

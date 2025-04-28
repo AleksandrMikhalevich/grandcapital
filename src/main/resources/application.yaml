@@ -18,5 +18,5 @@ spring:
       expired: 3600000
   data:
     redis:
-      port: ${REDIS_PORT}
+      port: ${REDIS_PORT:6379}
       host: ${REDIS_HOST}
