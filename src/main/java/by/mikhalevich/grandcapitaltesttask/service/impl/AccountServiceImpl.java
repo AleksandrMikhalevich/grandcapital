@@ -62,13 +62,22 @@ public class AccountServiceImpl implements AccountService {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new MoneyTransferException(MONEY_TRANSFER_AMOUNT_ERROR_MESSAGE);
         }
-        Account senderAccount = accountRepository.findByUserIdForUpdate(fromUserId)
+
+        Long firstUserId = fromUserId.compareTo(toUserId) < 0 ? fromUserId : toUserId;
+        Long secondUserId = fromUserId.compareTo(toUserId) < 0 ? toUserId : fromUserId;
+
+        Account firstAccount  = accountRepository.findByUserIdForUpdate(firstUserId)
                 .orElseThrow(() -> new DataNotFoundException(SENDER_ACCOUNT_NOT_FOUND_MESSAGE));
-        Account receiverAccount = accountRepository.findByUserIdForUpdate(toUserId)
+        Account secondAccount   = accountRepository.findByUserIdForUpdate(secondUserId)
                 .orElseThrow(() -> new DataNotFoundException(RECEIVER_ACCOUNT_NOT_FOUND_MESSAGE));
+
+        Account senderAccount = fromUserId.equals(firstUserId) ? firstAccount : secondAccount;
+        Account receiverAccount = fromUserId.equals(firstUserId) ? secondAccount : firstAccount;
+
         if (senderAccount.getBalance().compareTo(amount) < 0) {
             throw new MoneyTransferException(MONEY_TRANSFER_NOT_ENOUGH_MONEY_MESSAGE);
         }
+
         senderAccount.setBalance(senderAccount.getBalance().subtract(amount));
         receiverAccount.setBalance(receiverAccount.getBalance().add(amount));
     }
